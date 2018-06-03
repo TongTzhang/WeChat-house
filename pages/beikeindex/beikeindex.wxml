@@ -1,0 +1,172 @@
+<!--pages/beikeindex/beikeindex.wxml-->
+<view id="app">
+  <view class='header'>
+    <view class='header-tit'>
+      <text class='h-t-tie'>{{allData.data.house_info.title}}</text>
+      <text class='h-t-stor'>商铺</text>
+      <text class='h-t-sell'>在售</text>
+    </view>
+    <view class='header-othertit'>别名：{{allData.data.house_info.seTitle}}</view>
+    <view class='header-image clearfix'>
+      <image wx:for="{{allData.data.house_info.images}}" src='{{item.image_path}}' class='header-image-left' wx:key=""></image>
+      <view class='more-img'>
+        <view class='img-num'>+{{imageNum}}</view>
+        <view class='img-more'>查看更多</view>
+      </view>
+    </view>
+    <view class='header-tab clearfix'>
+      <view class='h-t-nav'>
+        <view>售价</view>
+        <view>{{allData.data.house_info.price}}万</view>
+      </view>
+      <view class='h-t-nav'>
+        <view>房型</view>
+        <view>{{allData.data.house_info.type}}</view>
+      </view>
+      <view class='h-t-nav'>
+        <view>建筑面积</view>
+        <view>{{allData.data.house_info.area}}m<sup>2</sup></view>
+      </view>
+    </view>
+    <view class='open-time'>
+      <text>开盘时间： </text>
+      <text>{{allData.data.house_info.open_time}}</text>
+      <image src='/images/more@2x.png' class='o-t-more'></image>
+    </view>
+    <view class='open-time'>
+      <text>地址： </text>
+      <text>{{allData.data.house_info.address}}</text>
+      <image src='/images/more@2x.png' class='o-t-more'></image>
+    </view>
+    <view class='preferential'>
+      <image src='/images/bg@2x.png' class='preferential-bg'></image>
+      <image src='/images/money.png' class='p-money'></image>
+      <text>全款9.8折，贷款9.9折</text>
+      <text class='preferential-treatment'>领优惠</text>
+    </view>
+    <view class='more-house'>更多房源信息</view>
+  </view>
+  <view class='house-type'>
+    <view class='h-t-mun clearfix'>
+      <view wx:for="{{allData.data.typs_conditions}}" wx:key="" bindtap='bindType'  data-index="{{index}}"  data-id = "{{item.id}}" class='item.index==selectType ? "select-type" : "" '>{{item.name}}</view>
+    </view>
+    <view class='h-t-infor' wx:for="{{typeData.data.house_lists}}" wx:key="">
+      <image src='{{item.image}}'></image>
+      <view class='h-t-cotent'>
+        <view class='h-t-cotent-tit'>
+          <text  class='h-t-cotent-tit-head'>{{item.title}}</text>
+          <text class='h-t-cotent-tit-tip'>在售</text>
+          <image src='/images/hot.png' class='h-t-cotent-tit-hot'></image>
+        </view>
+        <view class='area'>建面191㎡/南北向</view>
+        <view class='h-t-infor-bar'>
+          <text wx:for='{{item.tabs}}' wx:key="">{{ item }}</text>
+        </view>
+        <view class='about-price'>
+          <text>约</text>
+          <text class='about-price-mun'>{{item.price}}</text>
+          <text>万/套</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='comments'>
+    <view class='comments-tit clearfix'>
+      用户评论
+      <view class='comments-tit-more'>
+        更多点评
+        <image src='/images/more@2x.png' class='o-t-more'></image>
+      </view>
+    </view>
+    <view class='comment-grade clearfix'>
+      <view class='comment-grade-star'>
+          <image src='/images/Star_big_act@2x.png'></image>
+          <image src='/images/Star_big_act@2x.png'></image>
+          <image src='/images/Star_big_act@2x.png'></image>
+          <image src='/images/Star_big_act@2x.png'></image>
+          <image src='/images/Star_big_nor@2x.png'></image>
+        <text class='comment-grade-mun'>综合<text>4.0</text>分</text>
+      </view>
+      <view class='around'>
+        <text wx:for="{{allData.data.comments.tab_score}}" wx:key="">{{item.name}}{{item.score}}分</text>
+      </view>
+    </view>
+    <view class='comments-type'>
+      <text>全部点评(<text>6</text>)</text>
+      <text>全部点评(<text>5</text>)</text>
+      <text>全部点评(<text>5</text>)</text>
+      <text>好评 (<text>5</text>)</text>
+      <text>差评(<text>6</text>)</text>
+      <text>有图(<text>6</text>)</text>
+    </view>
+    <view class='somebody'>
+      <view class='somebody-head' wx:for="{{allData.data.comments.comment}}" wx:key="">
+        <image src='{{item.user_image}}' class='somebody-img'></image>
+        <view class='somebody-info'>
+          <view class='somebody-name'>{{item.user_name}}</view>
+          <view class='somebody-star'>
+            <image src='/images/Star_big_act@2x.png'></image>
+            <image src='/images/Star_big_act@2x.png'></image>
+            <image src='/images/Star_big_act@2x.png'></image>
+            <image src='/images/Star_big_act@2x.png'></image>
+            <image src='/images/Star_big_nor@2x.png'></image>
+            <text wx:for="{{item.user_score}}" wx:key="">{{item.name}}{{item.score}}</text>
+          </view>
+        </view>
+        <view class='somebody-say'>{{item.user_comment}}</view>
+        <view class='somebody-say-all'>
+          <text>全文</text>
+        </view>
+        <view class='somebody-say-date'>
+          <text>{{item.create_time}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='ask'>
+    <view class='comments-tit clearfix'>
+      买房问大家(1389)
+      <view class='comments-tit-more'>
+        查看全部
+        <image src='/images/more@2x.png' class='o-t-more'></image>
+      </view>
+    </view>
+    <view class='ask-name' wx:for="{{allData.data.questions}}" wx:key="">
+      <image src='/images/ask@2x.png' class='ask-img'></image>
+      <view class='ask-content'>
+        <text>{{item.question}}</text>
+        <view class='ask-attention'>
+          <text>{{item.attention_num}}人关注</text>
+          <text> {{item.answer_num}}个回答</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='recommending'>
+    <view class='comments-tit clearfix'>
+     周边推荐
+      <view class='comments-tit-more'>
+        更多推荐
+        <image src='/images/more@2x.png' class='o-t-more'></image>
+      </view>
+    </view>
+    <view class='recommending-list'>
+      <view class='r-l-content' wx:for="{{allData.data.hotlists}}" wx:key="">
+        <view class='recommending-list-img'>
+          <image src='{{item.image}}'></image>
+        </view>
+        <view class='recommending-list-tit'>
+          <text class='recommending-list-tit-name'>{{item.title}}</text>
+          <text class='recommending-list-tit-nav'>住宅</text>
+        </view>
+        <view class='around-address'>{{item.address}}</view>
+        <view class='around-price'>均价{{item.uprice}}元/平</view>
+      </view>
+    </view>
+  </view>
+  <view class='foot'>预售许可证： 京房售证字（2017）7号</view>
+  <view class='footer'>
+    <view class='ask-preferential'>询优惠</view>
+    <view class='ask-preferential'>联系售楼处</view>
+  </view>
+</view>
